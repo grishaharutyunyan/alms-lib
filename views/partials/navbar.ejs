@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title></title>
+   <link rel="icon" href="/favicon.ico" type="image/png">
+   <link rel='stylesheet' href='/stylesheets/style.css' />
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-ezX1UyBDeL/MZGNqI4APtGxvYfApGq1Yq0QYKBwKawdy6aiEBv/KaA8H06R+JZzN" crossorigin="anonymous">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<header>
+   <nav class="navbar">
+     <div class="navbar-brand">
+       <a style="text-decoration:none" href="/" class="brand-link">
+         <span class="brand-text">Picsart Academy</span>
+       </a>
+     </div>
+     <div class="navbar-menu">
+       <ul class="navbar-list">
+         <li class="navbar-item"><a href="/" class="navbar-link">Home</a></li>
+         <li class="navbar-item"><a href="/books/catalog" class="navbar-link">Catalog</a></li>
+       </ul>
+     </div>
+     <div class="navbar-buttons">
+       <% if (userAuthenticated) { %>
+         <!-- Display user-specific content when logged in -->
+         <div class="profile-picture" id="profilePictureContainer">
+           <!-- Add an image element for the profile picture -->
+           <img id="profilePicture" src="<%= user.profileImage %>" alt="Profile Picture">
+         </div>
+        
+         <div class="menu-container" id="menuContainer">
+           <!-- <button class="close-btn" id="closeBtn">&times;</button> -->
+           <ul>
+             <span id="userFullName" style="color:black"><%= user.email %></span>
+              <hr>
+             
+             <li><a href="/users/profile" class="menu-link">Profile</a></li>
+             <li><a href="#" class="menu-link">Notifications</a></li>
+             <li><a href="#" class="menu-link">Contact us</a></li>
+           </ul>
+         </div>
+         <a href="/users/logout" class="button">Logout</a>
+       <% } else { %>
+         <!-- Display these buttons when not logged in -->
+         <a href="/users/login" class="button">Login</a>
+         <a href="/users/register" class="button">Sign Up</a>
+       <% } %>
+     </div>
+   </nav>
+ </header>
+
+<style>
+   .profile-picture {
+     cursor: pointer;
+     position: relative;
+     width: 40px;
+     height: 40px;
+     border-radius: 50%;
+     overflow: hidden;
+   }
+
+   #profilePicture {
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+   }
+
+   .menu-container {
+     position: fixed;
+     top: 90px;
+     right: -250px;
+  
+     width: 167px;
+     background-color: #fff;
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+     transition: 0.4s;
+     z-index: 999;
+     overflow-y: auto;
+   }
+
+   .menu-container ul {
+    list-style-type: none;
+    padding: 20px;
+    margin: 0;
+  }
+
+  .menu-container li {
+    margin-bottom: 15px;
+    transition: color 0.3s, border 0.3s; 
+  }
+  .menu-container a {
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    display: block;
+    border: 1px solid transparent; 
+    padding: 8px; 
+  }
+
+  .menu-container a:hover {
+    color: #C209C1;; 
+    border: 1px solid #C209C1;; 
+  }
+
+  .menu-container a.active {
+     color: #C209C1;
+     border: 1px solid #C209C1;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+</style>
+
+<script>
+ document.addEventListener("DOMContentLoaded", function () {
+    const profilePictureContainer = document.getElementById("profilePictureContainer");
+    const menuContainer = document.getElementById("menuContainer");
+
+    const currentPage = window.location.pathname;
+    const profileLink = document.querySelector('.menu-container a[href="/users/profile"]');
+    const homeLink = document.querySelector('.menu-container a[href="/"]');
+    const catalogLink = document.querySelector('.menu-container a[href="/books/catalog"]');
+
+    if (profileLink && currentPage === '/users/profile') {
+      profileLink.classList.add('active');
+    } else if (homeLink && currentPage === '/') {
+      homeLink.classList.add('active');
+    } else if (catalogLink && currentPage === '/books/catalog') {
+      catalogLink.classList.add('active');
+    }
+
+    profilePictureContainer.addEventListener("click", function (event) {
+      event.stopPropagation();
+      menuContainer.style.right = menuContainer.style.right === "0px" ? "-250px" : "0";
+    });
+
+    document.addEventListener("click", function (event) {
+      if (
+        !menuContainer.contains(event.target) &&
+        event.target !== profilePictureContainer &&
+        !profilePictureContainer.contains(event.target)
+      ) {
+        menuContainer.style.right = "-250px";
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

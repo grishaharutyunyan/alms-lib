@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="display: flex; justify-content: space-around; font-size: 24px; font-weight: bold; color: #333;margin-top: 50px;">Recent Additions</div>
+    <div class="custom-container">
+        <div class="custom-carousel-view">
+          <button id="custom-prev-btn" class="custom-prev-btn">
+            <svg viewBox="0 0 512 512" width="20" title="chevron-circle-left">
+              <path d="M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zM142.1 273l135.5 135.5c9.4 9.4 24.6 9.4 33.9 0l17-17c9.4-9.4 9.4-24.6 0-33.9L226.9 256l101.6-101.6c9.4-9.4 9.4-24.6 0-33.9l-17-17c-9.4-9.4-24.6-9.4-33.9 0L142.1 239c-9.4 9.4-9.4 24.6 0 34z" />
+            </svg>
+          </button>
+          <div id="custom-item-list" class="custom-item-list">
+            <div class="custom-item" onmouseover="zoomIn(this)" onmouseout="zoomOut(this)"></div>
+            <div class="custom-item" onmouseover="zoomIn(this)" onmouseout="zoomOut(this)"></div>
+            <div class="custom-item" onmouseover="zoomIn(this)" onmouseout="zoomOut(this)"></div>
+            <div class="custom-item" onmouseover="zoomIn(this)" onmouseout="zoomOut(this)"></div>
+            <div class="custom-item" onmouseover="zoomIn(this)" onmouseout="zoomOut(this)"></div>
+            <div class="custom-item" onmouseover="zoomIn(this)" onmouseout="zoomOut(this)"></div>
+            <div class="custom-item" onmouseover="zoomIn(this)" onmouseout="zoomOut(this)"></div>
+            <div class="custom-item" onmouseover="zoomIn(this)" onmouseout="zoomOut(this)"></div>
+            <div class="custom-item" onmouseover="zoomIn(this)" onmouseout="zoomOut(this)"></div>
+            <div class="custom-item" onmouseover="zoomIn(this)" onmouseout="zoomOut(this)"></div>
+          </div>
+          <button id="custom-next-btn" class="custom-next-btn">
+            <svg viewBox="0 0 512 512" width="20" title="chevron-circle-right">
+              <path d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zm113.9 231L234.4 103.5c-9.4-9.4-24.6-9.4-33.9 0l-17 17c-9.4 9.4-9.4 24.6 0 33.9L285.1 256 183.5 357.6c-9.4 9.4-9.4 24.6 0 33.9l17 17c9.4 9.4 24.6 9.4 33.9 0L369.9 273c9.4-9.4 9.4-24.6 0-34z" />
+            </svg>
+          </button>
+        </div>
+    </div>
+
+    <style>
+      .custom-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+      }
+
+      .custom-carousel-view {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        padding: 44px 0;
+        transition: all 0.25s ease-in;
+      }
+
+      .custom-item-list {
+        max-width: 850px;
+        width: 70vw;
+        padding: 50px 10px;
+        display: flex;
+        gap: 48px;
+        scroll-behavior: smooth;
+        transition: all 0.25s ease-in;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        overflow: auto;
+        scroll-snap-type: x mandatory;
+      }
+
+      .custom-item-list::-webkit-scrollbar {
+        display: none;
+      }
+
+      .custom-prev-btn {
+        background: none;
+        cursor: pointer;
+      }
+
+      .custom-next-btn {
+        cursor: pointer;
+      }
+
+      .custom-item {
+        scroll-snap-align: center;
+        min-width: 131px;
+        height: 172px;
+        background-color: deeppink;
+        border-radius: 1px;
+        background-image: url('/images/1.jpg');
+        background-size: cover;
+        transition: transform 0.4s ease-in-out;
+        box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
+        }
+
+
+      
+
+      .custom-item:hover {
+        transform: scale(1.1); /* Adjust the scale factor as needed */
+      }
+    </style>
+
+    <script>
+      const customPrev = document.getElementById('custom-prev-btn');
+      const customNext = document.getElementById('custom-next-btn');
+      const customList = document.getElementById('custom-item-list');
+
+      const customItemWidth = 150;
+      const customPadding = 10;
+
+      customPrev.addEventListener('click', () => {
+        customList.scrollLeft -= customItemWidth + customPadding;
+      });
+
+      customNext.addEventListener('click', () => {
+        customList.scrollLeft += customItemWidth + customPadding;
+      });
+
+      function zoomIn(element) {
+        element.style.transform = 'scale(1.1)';
+      }
+
+      function zoomOut(element) {
+        element.style.transform = 'scale(1)';
+      }
+    </script>
+</body>
+</html>
