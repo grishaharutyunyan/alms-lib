@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "nodemon app.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -19,14 +19,21 @@
     "express-ejs-layouts": "^2.5.1",
     "express-favicon": "^2.0.4",
     "express-session": "^1.17.3",
+    "f": "^1.4.0",
     "flash": "^1.1.0",
+    "fs": "^0.0.1-security",
     "http-errors": "~1.6.3",
     "mongodb": "^6.3.0",
     "mongoose": "^8.0.3",
     "morgan": "~1.9.1",
     "mysql": "^2.18.1",
+    "nvm": "^0.0.4",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
-    "punycode": "^2.3.1"
+    "punycode": "^2.3.1",
+    "url": "^0.11.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
   }
 }

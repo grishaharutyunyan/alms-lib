@@ -11,7 +11,7 @@ const User = require('../models/User')
 router.get('/profile', ensureAuthenticated, (req, res) => {
   // Assuming user data is available in req.user
   res.render('users/profile', { user: req.user, userAuthenticated: true });
-});
+});``
 
 
 

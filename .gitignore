@@ -3,3 +3,4 @@ node_modules/rm -rf .git
 .vscode/
 .env
 .Ds_Store
+.node_modules
